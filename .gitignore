@@ -1,4 +1,4 @@
-data/
+data/db.sqlite
 logs/
 node_modules/
 config.json
