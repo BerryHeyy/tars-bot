@@ -1,16 +1,16 @@
 // get config variables
-const config = require('./config.json')
+require('dotenv').config();
 
 const Discord = require('discord.js');
 const Client = require('./src/Bot.js');
 
 global.__basedir = __dirname;
 
-const client = new Client(config);
+const client = new Client();
 
 function init() {
   client.loadCommands('./src/commands');
-  client.login(config.token);
+  client.login(process.env.DISCORD_TOKEN);
 }
 
 init();

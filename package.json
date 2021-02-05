@@ -3,6 +3,7 @@
     "ascii-table": "^0.0.9",
     "better-sqlite3": "^7.1.2",
     "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
     "winston": "^3.3.3"
   },
   "name": "tars_bot",
@@ -14,5 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": "15.7.0",
+    "npm": "*"
+  }
 }

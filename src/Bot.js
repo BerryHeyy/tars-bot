@@ -2,20 +2,21 @@ const discord = require('discord.js');
 const AsciiTable = require('ascii-table');
 const { readdir, readdirSync } = require('fs');
 const { join, resolve } = require('path');
-const config = require('../config.json');
 //const Command = require('./commands/Command');
 
 class Bot extends discord.Client {
 
-  constructor(config, options = {}) {
+  constructor(options = {}) {
 
     super(options);
 
     this.logger = require('./util/logger.js');
 
-    this.token = config.token;
+    this.token = process.env.DISCORD_TOKEN;
 
-    this.ownerId = config.ownerId;
+    this.ownerId = process.env.OWNER_ID;
+    
+    this.prefix = process.env.PREFIX;
 
     this.commands = new discord.Collection();
 
@@ -29,7 +30,7 @@ class Bot extends discord.Client {
         return;
       }
       if (message.author.bot) return;
-      if (message.content[0] !== config.prefix) return;
+      if (message.content[0] !== this.prefix) return;
 
       const args = message.content.slice(1).trim().split(' ');
       const cmd = args.shift().toLowerCase();
