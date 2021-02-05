@@ -25,10 +25,10 @@ const quotes = {
     ) VALUES (?, ?, ?, ?, ?);
   `),
   
-  selectRowByIndex: db.prepare(`SELECT 1 FROM quotes WHERE rowid = ?;`),
+  selectRowByIndex: db.prepare('SELECT * FROM quotes WHERE rowid = ?'),
   selectRowByUserId: db.prepare('SELECT * FROM quotes WHERE user_id = ?'),
-  selectRowExists: db.prepare(`SELECT EXISTS(SELECT 1 FROM quotes WHERE message_id = ?)`),
-  selectRowCount: db.prepare(`SELECT Count(*) FROM quotes`)
+  selectRowExists: db.prepare('SELECT EXISTS(SELECT 1 FROM quotes WHERE message_id = ?)'),
+  selectRowCount: db.prepare('SELECT Count(*) FROM quotes')
 
 }
 

@@ -39,11 +39,17 @@ class Bot extends discord.Client {
 
       if (!command) return; // Return if no command was found      
 
-      if (command.ownerOnly) if (message.author.id === this.ownerId) return await command.run(message, args);
-      else return;
+      if (command.ownerOnly) {
+        if (message.author.id === this.ownerId) return await command.run(message, args);
+        else return;
+      }
+      
+      if (command.modCommand) {
+        if (message.member.roles.cache.find(r => r.name === "Station Crew") || message.author.id === this.ownerId);
+        else return;
+      }
 
       return await command.run(message, args);
-
     });
 
   }

@@ -33,6 +33,8 @@ class Command {
 
         this.ownerOnly = options.ownerOnly || false;
 
+        this.modCommand = options.modCommand || false;
+
     }
 
     /**

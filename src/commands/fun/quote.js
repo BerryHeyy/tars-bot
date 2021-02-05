@@ -3,12 +3,12 @@ const discord = require('discord.js');
 const Utils = require('../../util/utils.js');
 const logger = require('../../util/logger.js');
 
-module.exports = class PingCommand extends Command {
+module.exports = class QuoteCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'quote',
       aliases: [],
-      usage: 'quote <message-id> || <mention-user>',
+      usage: 'quote <message-id> || <target-user>',
       description: 'Add quote to the bot quote database. Need developermode turned on to be able to access message IDs.',
     });
   }
@@ -21,14 +21,15 @@ module.exports = class PingCommand extends Command {
      */
   async run(message, args) {
     if (args.length === 0) {
+      if (this.bot.db.quotes.selectRowCount.pluck().get() == 0) return;
+
       const quotesLength = this.bot.db.quotes.selectRowCount.pluck().get();
       logger.info(quotesLength);
       const randomIndex = Math.floor(Math.random() * quotesLength);
       logger.info(randomIndex);
 
-      const selectedQuote = this.bot.db.quotes.selectRowByIndex.get(randomIndex);
+      const selectedQuote = this.bot.db.quotes.selectRowByIndex.get(randomIndex + 1);
       logger.info(selectedQuote);
-      console.log(selectedQuote);
 
       const user_id = selectedQuote["user_id"];
       const message_content = selectedQuote["message_content"];
